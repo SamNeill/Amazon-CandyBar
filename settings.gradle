@@ -1,1 +1,8 @@
-include ':app', ':library', ':extLibs:PreLollipopTransitions'
+rootProject.name = "candybar"
+
+include ':extLibs:PreLollipopTransitions'
+include ':library'
+
+if (!System.env.JITPACK) {
+    include ':app'
+}

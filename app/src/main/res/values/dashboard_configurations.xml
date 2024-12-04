@@ -95,10 +95,7 @@
         <item>http://www.yourwebsite.com</item>
         <item>your@email.com</item>
         <item>https://t.me/yourname</item>
-
-
     </string-array>
-
 
     <!-- CONFIG: DONATE -->
     <bool name="enable_donation">true</bool>
@@ -117,7 +114,6 @@
         * bottom_navigation = Show bottom navigation bar
     -->
     <string name="navigation_view_style">bottom_navigation</string>
-
 
     <!-- Enable Amazon Billing -->
     <bool name="enable_amazon_billing">true</bool>

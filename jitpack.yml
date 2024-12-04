@@ -1,4 +1,4 @@
 jdk: openjdk17
 install:
   - chmod +x gradlew
-  - ./gradlew :library:publishToMavenLocal :extLibs:PreLollipopTransitions:publishToMavenLocal
+  - ./gradlew :library:clean :library:build :library:publishToMavenLocal
