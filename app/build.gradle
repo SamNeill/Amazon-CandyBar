@@ -84,5 +84,10 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    implementation files('libs/appstore-sdk-3.0.5.jar')
+    
+    if (!System.env.JITPACK) {
+        implementation files('libs/appstore-sdk-3.0.5.jar')
+    } else {
+        compileOnly files('libs/appstore-sdk-3.0.5.jar')
+    }
 }

@@ -1,4 +1,7 @@
 jdk: openjdk17
+before_install:
+  - mkdir -p app/libs
+  - touch app/libs/appstore-sdk-3.0.5.jar
 install:
   - chmod +x gradlew
   - ./gradlew build :extLibs:PreLollipopTransitions:publishToMavenLocal :library:publishToMavenLocal
