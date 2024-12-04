@@ -1,8 +1,10 @@
 rootProject.name = "candybar"
 
+gradle.ext.isJitPack = System.getenv('JITPACK') != null
+
 include ':extLibs:PreLollipopTransitions'
 include ':library'
 
-if (!System.env.JITPACK) {
+if (!gradle.ext.isJitPack) {
     include ':app'
 }
