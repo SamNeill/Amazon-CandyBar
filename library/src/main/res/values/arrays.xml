@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Premium Request Products -->
+    <string-array name="premium_request_product_ids">
+        <item>1_20_icon_request</item>
+        <item>1_30_icon_request</item>
+        <item>1_40_icon_request</item>
+        <item>1_50_icon_request</item>
+    </string-array>
+    
+    <integer-array name="premium_request_counts">
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </integer-array>
+    
+    <string-array name="premium_request_prices">
+        <item>$1.99</item>
+        <item>$2.99</item>
+        <item>$3.99</item>
+        <item>$4.99</item>
+    </string-array>
+
+    <!-- Donation Products -->
+    <string-array name="donation_product_ids">
+        <item>coffee</item>
+        <item>breakfast</item>
+        <item>lunch</item>
+        <item>dinner</item>
+    </string-array>
+    
+    <string-array name="donation_product_prices">
+        <item>$0.99</item>
+        <item>$1.99</item>
+        <item>$4.99</item>
+        <item>$9.99</item>
+    </string-array>
+    
+    <string-array name="donation_product_names">
+        <item>Buy me a coffee</item>
+        <item>Buy me breakfast</item>
+        <item>Buy me lunch</item>
+        <item>Buy me dinner</item>
+    </string-array>
+</resources> 

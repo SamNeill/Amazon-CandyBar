@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            // Only configure signing if not on JitPack
+            if (!System.env.JITPACK) {
+                keyAlias 'key0'
+                keyPassword 'candybar'
+                storeFile file('candybar.jks')
+                storePassword 'candybar'
+            }
+
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    compileSdk rootProject.ext.CompileSdk
+    buildToolsVersion "34.0.0"
+
+    namespace 'com.candybar.dev'
+
+    defaultConfig {
+        applicationId 'com.candybar.dev'
+        minSdkVersion rootProject.ext.MinSdk
+        targetSdkVersion rootProject.ext.TargetSdk
+        versionCode 1
+        versionName '1.0'
+
+        // This code loads the license key from `local.properties` file
+        // and saves it as build config field named "LICENSE_KEY"
+        String licenseKey = ''
+        Properties props = new Properties()
+        File propFile = rootProject.file('local.properties')
+        if (propFile.exists()) {
+            props.load(propFile.newDataInputStream())
+            licenseKey = props.get('license_key', '')
+        }
+        buildConfigField 'String', 'LICENSE_KEY', "\"$licenseKey\""
+
+        manifestPlaceholders = [
+            amazonAppId: "amzn1.application-oa2-client.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+    }
+
+    buildTypes {
+        release {
+            if (!System.env.JITPACK) {
+                signingConfig signingConfigs.release
+            }
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    lint {
+        abortOnError false
+    }
+
+    configurations {
+        configureEach {
+            exclude group: 'com.amazon.device', module: 'amazon-appstore-sdk'
+            resolutionStrategy {
+                force 'com.amazon.device:amazon-appstore-sdk:3.0.5'
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation project(':library')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.21"
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    implementation files('libs/appstore-sdk-3.0.5.jar')
+}
