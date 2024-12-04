@@ -69,6 +69,11 @@ android {
             force 'androidx.activity:activity:1.8.2'
             force 'androidx.fragment:fragment:1.6.2'
         }
+        
+        if (System.env.JITPACK) {
+            exclude group: '*', module: '*appstore*'
+            exclude group: 'com.amazon*'
+        }
     }
 }
 
@@ -85,7 +90,7 @@ afterEvaluate {
                 pom {
                     name = 'Candybar Library'
                     description = 'Android Icon Pack Dashboard Library'
-                    url = 'https://github.com/SamNeill/Candybar-Amazon'
+                    url = 'https://github.com/SamNeill/Amazon-CandyBar'
                     licenses {
                         license {
                             name = 'Apache License 2.0'
@@ -99,9 +104,9 @@ afterEvaluate {
                         }
                     }
                     scm {
-                        connection = 'scm:git:git://github.com/SamNeill/Candybar-Amazon.git'
-                        developerConnection = 'scm:git:ssh://github.com/SamNeill/Candybar-Amazon.git'
-                        url = 'https://github.com/SamNeill/Candybar-Amazon'
+                        connection = 'scm:git:git://github.com/SamNeill/Amazon-CandyBar.git'
+                        developerConnection = 'scm:git:ssh://github.com/SamNeill/Amazon-CandyBar.git'
+                        url = 'https://github.com/SamNeill/Amazon-CandyBar'
                     }
                 }
             }
