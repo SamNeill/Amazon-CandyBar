@@ -73,11 +73,6 @@ android {
             if (System.env.JITPACK) {
                 exclude group: '*', module: '*appstore*'
                 exclude group: 'com.amazon*'
-            } else {
-                exclude group: 'com.amazon.device', module: 'amazon-appstore-sdk'
-                resolutionStrategy {
-                    force 'com.amazon.device:amazon-appstore-sdk:3.0.5'
-                }
             }
         }
     }
@@ -89,8 +84,4 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    
-    if (!System.env.JITPACK) {
-        implementation files('libs/appstore-sdk-3.0.5.jar')
-    }
 }
