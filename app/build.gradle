@@ -70,9 +70,14 @@ android {
 
     configurations {
         configureEach {
-            exclude group: 'com.amazon.device', module: 'amazon-appstore-sdk'
-            resolutionStrategy {
-                force 'com.amazon.device:amazon-appstore-sdk:3.0.5'
+            if (System.env.JITPACK) {
+                exclude group: '*', module: '*appstore*'
+                exclude group: 'com.amazon*'
+            } else {
+                exclude group: 'com.amazon.device', module: 'amazon-appstore-sdk'
+                resolutionStrategy {
+                    force 'com.amazon.device:amazon-appstore-sdk:3.0.5'
+                }
             }
         }
     }
@@ -87,7 +92,5 @@ dependencies {
     
     if (!System.env.JITPACK) {
         implementation files('libs/appstore-sdk-3.0.5.jar')
-    } else {
-        compileOnly files('libs/appstore-sdk-3.0.5.jar')
     }
 }
