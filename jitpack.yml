@@ -3,5 +3,5 @@ before_install:
   - echo "sdk.dir=/opt/android-sdk-linux" > local.properties
 install:
   - chmod +x gradlew
-  - ./gradlew clean :library:assembleRelease :library:publishToMavenLocal
+  - ./gradlew :library:assembleRelease :library:publishToMavenLocal
   - ./gradlew :extLibs:PreLollipopTransitions:assembleRelease :extLibs:PreLollipopTransitions:publishToMavenLocal
