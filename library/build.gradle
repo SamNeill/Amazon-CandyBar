@@ -85,7 +85,7 @@ afterEvaluate {
                 pom {
                     name = 'Candybar Library'
                     description = 'Android Icon Pack Dashboard Library'
-                    url = 'https://github.com/SamNeill/Candybar-Amazon'
+                    url = 'https://github.com/SamNeill/Amazon-CandyBar'
                     licenses {
                         license {
                             name = 'Apache License 2.0'
@@ -99,9 +99,9 @@ afterEvaluate {
                         }
                     }
                     scm {
-                        connection = 'scm:git:git://github.com/SamNeill/Candybar-Amazon.git'
-                        developerConnection = 'scm:git:ssh://github.com/SamNeill/Candybar-Amazon.git'
-                        url = 'https://github.com/SamNeill/Candybar-Amazon'
+                        connection = 'scm:git:git://github.com/SamNeill/Amazon-CandyBar.git'
+                        developerConnection = 'scm:git:ssh://github.com/SamNeill/Amazon-CandyBar.git'
+                        url = 'https://github.com/SamNeill/Amazon-CandyBar'
                     }
                 }
             }

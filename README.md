@@ -76,7 +76,7 @@ dependencies {
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/SamNeill/Candybar-Amazon.git
+git clone https://github.com/SamNeill/Amazon-CandyBar.git
 ```
 
 2. Open in Android Studio
