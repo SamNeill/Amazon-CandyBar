@@ -70,15 +70,6 @@ android {
             force 'androidx.fragment:fragment:1.6.2'
         }
     }
-
-    configurations {
-        all {
-            if (System.env.JITPACK) {
-                exclude group: 'com.amazon.device', module: 'amazon-appstore-sdk'
-                exclude group: '*', module: '*appstore*'
-            }
-        }
-    }
 }
 
 afterEvaluate {
@@ -89,7 +80,7 @@ afterEvaluate {
 
                 groupId = 'com.github.SamNeill'
                 artifactId = 'candybar'
-                version = rootProject.ext.VersionName
+                version = '3.20.3'
 
                 pom {
                     name = 'Candybar Library'
@@ -111,18 +102,6 @@ afterEvaluate {
                         connection = 'scm:git:git://github.com/SamNeill/Amazon-CandyBar.git'
                         developerConnection = 'scm:git:ssh://github.com/SamNeill/Amazon-CandyBar.git'
                         url = 'https://github.com/SamNeill/Amazon-CandyBar'
-                    }
-                }
-
-                pom.withXml {
-                    def dependencies = asNode().appendNode('dependencies')
-                    configurations.implementation.allDependencies.each {
-                        if (!it.name.contains('appstore')) {
-                            def dependency = dependencies.appendNode('dependency')
-                            dependency.appendNode('groupId', it.group)
-                            dependency.appendNode('artifactId', it.name)
-                            dependency.appendNode('version', it.version)
-                        }
                     }
                 }
             }
@@ -176,10 +155,8 @@ dependencies {
     implementation 'com.github.danimahardhika.android-helpers:permission:0.1.0'
     implementation 'com.github.danimahardhika:DrawMe:4a672e78fc'
 
-    // Conditionally include Amazon dependencies
-    if (!System.env.JITPACK) {
-        implementation files('../app/libs/appstore-sdk-3.0.5.jar')
-    }
+    // Amazon In-App Purchasing SDK
+    implementation 'com.amazon.device:amazon-appstore-sdk:3.0.5'
 
     // Add Muzei dependency
     implementation "com.google.android.apps.muzei:muzei-api:3.4.1"

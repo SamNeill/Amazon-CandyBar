@@ -69,11 +69,15 @@ android {
     }
 
     configurations {
-        all {
-            // Improved JitPack handling
+        configureEach {
             if (System.env.JITPACK) {
-                exclude group: 'com.amazon.device', module: 'amazon-appstore-sdk'
                 exclude group: '*', module: '*appstore*'
+                exclude group: 'com.amazon*'
+            } else {
+                exclude group: 'com.amazon.device', module: 'amazon-appstore-sdk'
+                resolutionStrategy {
+                    force 'com.amazon.device:amazon-appstore-sdk:3.0.5'
+                }
             }
         }
     }
@@ -86,7 +90,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     
-    // Only include Amazon SDK for non-JitPack builds
     if (!System.env.JITPACK) {
         implementation files('libs/appstore-sdk-3.0.5.jar')
     }
