@@ -21,32 +21,33 @@ apply plugin: 'maven-publish'
 
 android {
     namespace 'candybar.lib'
-    compileSdk 35
+
+    compileSdk rootProject.ext.CompileSdk
 
     defaultConfig {
-        minSdk 21
-        targetSdk 35
-        
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-        
-        buildConfigField "String", "VERSION_NAME", "\"${versionName}\""
+        minSdkVersion rootProject.ext.MinSdk
+        targetSdkVersion rootProject.ext.TargetSdk
+        versionCode rootProject.ext.VersionCode
+        versionName rootProject.ext.VersionName
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        buildConfigField 'String', 'VERSION_NAME', "\"${rootProject.ext.VersionName}\""
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
         }
     }
-    
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     publishing {
-        singleVariant("release") {
+        singleVariant('release') {
             withSourcesJar()
             withJavadocJar()
         }
@@ -68,48 +69,6 @@ android {
             force 'androidx.activity:activity:1.8.2'
             force 'androidx.fragment:fragment:1.6.2'
         }
-        
-        if (System.env.JITPACK) {
-            exclude group: '*', module: '*appstore*'
-            exclude group: 'com.amazon*'
-        }
-    }
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.recyclerview:recyclerview:1.3.2'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.palette:palette:1.0.0'
-    implementation 'androidx.annotation:annotation:1.7.1'
-    implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.21'
-
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-    implementation 'com.github.pluscubed:recycler-fast-scroll:0.3.2'
-    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
-    implementation 'com.mikhaellopez:circularimageview:4.3.1'
-    implementation 'com.anjlab.android.iab.v3:library:2.0.3'
-    implementation 'com.github.KeepSafe:TapTargetView:1.13.3'
-    implementation 'com.github.yukuku:ambilwarna:2.0.1'
-    implementation 'com.github.danimahardhika.android-helpers:core:1.1.0@aar'
-    implementation 'com.github.danimahardhika.android-helpers:animation:1.1.0@aar'
-    implementation 'com.github.danimahardhika.android-helpers:license:1.1.0@aar'
-    implementation 'com.github.danimahardhika:cafebar:1.3.0'
-    implementation 'me.grantland:autofittextview:0.2.1'
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    implementation 'com.bluelinelabs:logansquare:1.3.7'
-    annotationProcessor 'com.bluelinelabs:logansquare-compiler:1.3.7'
-    implementation project(':extLibs:PreLollipopTransitions')
-
-    if (!gradle.ext.isJitPack) {
-        implementation files('libs/appstore-sdk-3.0.5.jar')
     }
 }
 
@@ -120,13 +79,13 @@ afterEvaluate {
                 from components.release
 
                 groupId = 'com.github.SamNeill'
-                artifactId = 'amazon-candybar'
-                version = '1.0.0'
+                artifactId = 'candybar'
+                version = '3.20.3'
 
                 pom {
                     name = 'Candybar Library'
                     description = 'Android Icon Pack Dashboard Library'
-                    url = 'https://github.com/SamNeill/Amazon-CandyBar'
+                    url = 'https://github.com/SamNeill/Candybar-Amazon'
                     licenses {
                         license {
                             name = 'Apache License 2.0'
@@ -140,12 +99,65 @@ afterEvaluate {
                         }
                     }
                     scm {
-                        connection = 'scm:git:git://github.com/SamNeill/Amazon-CandyBar.git'
-                        developerConnection = 'scm:git:ssh://github.com/SamNeill/Amazon-CandyBar.git'
-                        url = 'https://github.com/SamNeill/Amazon-CandyBar'
+                        connection = 'scm:git:git://github.com/SamNeill/Candybar-Amazon.git'
+                        developerConnection = 'scm:git:ssh://github.com/SamNeill/Candybar-Amazon.git'
+                        url = 'https://github.com/SamNeill/Candybar-Amazon'
                     }
                 }
             }
         }
     }
+}
+
+dependencies {
+    implementation project(':extLibs:PreLollipopTransitions')
+
+    api 'androidx.annotation:annotation:1.8.2'
+    api 'androidx.appcompat:appcompat:1.7.0'
+    api 'androidx.core:core:1.12.0'
+    api 'androidx.core:core-ktx:1.12.0'
+    api 'androidx.activity:activity:1.8.2'
+    api 'androidx.fragment:fragment:1.6.2'
+    api 'com.google.android.apps.muzei:muzei-api:3.4.2'
+    api 'dev.jahir.KustomAPI:api:6369c37'
+    api 'dev.jahir.KustomAPI:preset:6369c37'
+
+    implementation 'androidx.work:work-runtime:2.9.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.palette:palette:1.0.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation 'com.google.android.play:review:2.0.1'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+
+    implementation 'com.bluelinelabs:logansquare:1.3.7'
+    annotationProcessor 'com.bluelinelabs:logansquare-compiler:1.3.7'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.3.0'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
+    implementation 'com.github.chrisbanes:PhotoView:1.3.1'
+    implementation 'me.grantland:autofittextview:0.2.1'
+    implementation 'com.github.KeepSafe:TapTargetView:1.13.2'
+    implementation 'com.github.sarsamurmu:AdaptiveIconBitmap:1.0.1'
+    implementation 'com.github.zixpo:recycler-fast-scroll:6add4dff39'
+    implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
+
+    implementation 'com.github.danimahardhika:cafebar:1.3.2'
+    implementation 'com.github.danimahardhika.android-helpers:core:-SNAPSHOT'
+    implementation 'com.github.danimahardhika.android-helpers:animation:0.1.0'
+    implementation 'com.github.danimahardhika.android-helpers:license:0.1.0'
+    implementation 'com.github.danimahardhika.android-helpers:permission:0.1.0'
+    implementation 'com.github.danimahardhika:DrawMe:4a672e78fc'
+
+    // Amazon In-App Purchasing SDK
+    implementation 'com.amazon.device:amazon-appstore-sdk:3.0.5'
+
+    // Add Muzei dependency
+    implementation "com.google.android.apps.muzei:muzei-api:3.4.1"
 }
