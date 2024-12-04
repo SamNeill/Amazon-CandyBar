@@ -1,6 +1,6 @@
 # CandyBar Amazon Icon Pack Dashboard
 
-[![JitPack](https://jitpack.io/v/SamNeill/Candybar-Amazon.svg)](https://jitpack.io/#SamNeill/Candybar-Amazon)
+[![JitPack](https://jitpack.io/v/SamNeill/Amazon-CandyBar.svg)](https://jitpack.io/#SamNeill/Amazon-CandyBar)
 [![Apache2 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 A customized version of the CandyBar Dashboard library specifically configured for Amazon Appstore icon packs. This fork includes Amazon In-App Billing integration and is optimized for publishing icon packs on the Amazon Appstore.
@@ -57,8 +57,8 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation 'com.github.SamNeill.Candybar-Amazon:candybar:v3.20.3-amazon'
-    implementation 'com.github.SamNeill.Candybar-Amazon:PreLollipopTransitions:v3.20.3-amazon'
+    implementation 'com.github.SamNeill.Amazon-CandyBar:candybar:v3.20.3-amazon'
+    implementation 'com.github.SamNeill.Amazon-CandyBar:PreLollipopTransitions:v3.20.3-amazon'
 }
 ```
 
